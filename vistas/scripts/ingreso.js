@@ -75,15 +75,6 @@ function cargaComprobantes(){
 	});
 }
 
-
-// function cargaImpuestos(){
-// 	//Cargamos los items al select cliente
-// 	$.post("../ajax/impuesto.php?op=selectImpuesto", function(r){
-//         $("#impuesto").append(r);
-//         $('#impuesto').selectpicker('refresh');
-// 	});
-// }
-
 function getNumIngreso(){
 	//Cargamos los items al select cliente
 	$.post("../ajax/ingreso.php?op=getNumIngreso", function(r){
@@ -327,7 +318,7 @@ function mostrarImpuesto(idcomprobante)
 }
 
 //Función para anular registros
-function anular(idingreso, idusuario)
+function anular(idingreso)
 {
 	swal({
 	    title: '¿Está seguro de cancelar el ingreso?',
@@ -361,7 +352,7 @@ function anular(idingreso, idusuario)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/ingreso.php?op=anular",
-			        data: {idingreso : idingreso, idusuario : idusuario},
+			        data: {idingreso : idingreso},
 			        cache: false,
 			        success: function(response) {
 			            if (response == 0) {

@@ -408,7 +408,7 @@ function mostrar(idconfiguracion)
 }
 
 //Función para desactivar registros
-function desactivar(idconfiguracion, idusuariocambio)
+function desactivar(idconfiguracion)
 {
 	swal({
 	    title: '¿Está seguro de desactivar la configuracion?',
@@ -443,7 +443,7 @@ function desactivar(idconfiguracion, idusuariocambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/configuracion.php?op=desactivar",
-			        data: {idconfiguracion : idconfiguracion, idusuariocambio : idusuariocambio},
+			        data: {idconfiguracion : idconfiguracion},
 			        cache: false,
 			        success: function(response) {
 			        	console.log(response);
@@ -484,7 +484,7 @@ function desactivar(idconfiguracion, idusuariocambio)
 }
 
 //Función para activar registros
-function activar(idconfiguracion, idusuariocambio)
+function activar(idconfiguracion)
 {
 	swal({
 	    title: '¿Está seguro de activar la configuracion?',
@@ -518,7 +518,7 @@ function activar(idconfiguracion, idusuariocambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/configuracion.php?op=activar",
-			        data: {idconfiguracion : idconfiguracion, idusuariocambio : idusuariocambio},
+			        data: {idconfiguracion : idconfiguracion},
 			        cache: false,
 			        success: function(response) {
 			            if (response == 0) {

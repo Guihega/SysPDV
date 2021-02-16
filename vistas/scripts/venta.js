@@ -334,7 +334,7 @@ function mostrarImpuesto(idcomprobante)
 }
 
 //Función para anular registros
-function anular(idventa,idusuario)
+function anular(idventa)
 {
 	swal({
 	    title: '¿Está seguro de cancelar la venta?',
@@ -368,7 +368,7 @@ function anular(idventa,idusuario)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/venta.php?op=anular",
-			        data: {idventa : idventa, idusuario : idusuario},
+			        data: {idventa : idventa},
 			        cache: false,
 			        success: function(response) {
 			            if (response == 0) {

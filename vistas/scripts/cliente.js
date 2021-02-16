@@ -181,7 +181,7 @@ function mostrar(idpersona)
 }
 
 //Función para eliminar registros
-function desactivar(idpersona, idUsuarioCambio)
+function desactivar(idpersona)
 {
 	swal({
 	    title: '¿Está seguro de desactivar el cliente?',
@@ -215,7 +215,7 @@ function desactivar(idpersona, idUsuarioCambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/persona.php?op=desactivar",
-			        data: {idpersona : idpersona, idUsuarioCambio : idUsuarioCambio},
+			        data: {idpersona : idpersona},
 			        cache: false,
 			        success: function(response) {
 			            if (response == 0) {
@@ -254,7 +254,7 @@ function desactivar(idpersona, idUsuarioCambio)
 	});
 }
 
-function activar(idpersona, idUsuarioCambio)
+function activar(idpersona)
 {
 	swal({
 	    title: '¿Está seguro de activar el cliente?',
@@ -288,7 +288,7 @@ function activar(idpersona, idUsuarioCambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/persona.php?op=activar",
-			        data: {idpersona : idpersona, idUsuarioCambio : idUsuarioCambio},
+			        data: {idpersona : idpersona},
 			        cache: false,
 			        success: function(response) {
 			            if (response == 0) {

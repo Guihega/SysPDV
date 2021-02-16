@@ -89,11 +89,10 @@ else
 		 		$data= Array();
 		 		while ($reg=$rspta->fetch_object()){
 		 			$data[]=array(
-		 				//idconfiguracion	empresa	alias	abreviatura	direccion	cp	correo	telefono	rfc	moneda	logo	impuesto	condicion
-		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idconfiguracion.')"><i class="fa fa-edit"></i></button>'.
-		 					' <button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idconfiguracion.','.$idusuariocambio.')"><i class="fa fa-close"></i></button>':
-		 					'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idconfiguracion.')"><i class="fa fa-eye"></i></button>'.
-		 					' <button class="btn  btn-xs btn-primary" onclick="activar('.$reg->idconfiguracion.','.$idusuariocambio.')"><i class="fa fa-check"></i></button>',
+		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idconfiguracion.')" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>'.
+	 					' <button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idconfiguracion.')"  data-toggle="tooltip" data-placement="top" title="Desactivar"><i class="fa fa-close"></i></button>':
+	 					'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idconfiguracion.')" data-toggle="tooltip" title="Ver"><i class="fa fa-eye"></i></button>'.
+	 					' <button class="btn btn-xs btn-primary" onclick="activar('.$reg->idconfiguracion.')"data-toggle="tooltip" title="Activar"><i class="fa fa-check"></i></button>',
 		 				"1"=>$reg->empresa,
 		 				"2"=>$reg->alias,
 		 				"3"=>$reg->abreviatura,

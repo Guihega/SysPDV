@@ -97,17 +97,17 @@ else
 
 		 		while ($reg=$rspta->fetch_object()){
 		 			$data[]=array(
-		 				"0"=>(($reg->estado==1)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idingreso.')"><i class="fa fa-eye"></i></button>'.
-		 					' <button class="btn btn-xs btn-danger" onclick="anular('.$reg->idingreso.','.$idusuario.')"><i class="fa fa-close"></i></button>':
-		 					'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idingreso.')"><i class="fa fa-eye"></i></button>').
-		 					'<a target="_blank" href="../reportes/exIngreso.php?id='.$reg->idingreso.'"> <button class="btn btn-xs btn-info"><i class="fa fa-file"></i></button></a>',
+		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idingreso.')" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>'.
+	 					' <button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idingreso.')"  data-toggle="tooltip" data-placement="top" title="Desactivar"><i class="fa fa-close"></i></button>':
+	 					'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idingreso.')" data-toggle="tooltip" title="Ver"><i class="fa fa-eye"></i></button>'.
+	 					' <button class="btn btn-xs btn-primary" onclick="activar('.$reg->idingreso.')"data-toggle="tooltip" title="Activar"><i class="fa fa-check"></i></button>',
 		 				"1"=>$reg->fecha,
 		 				"2"=>$reg->proveedor,
 		 				"3"=>$reg->usuario,
 		 				"4"=>$reg->documento,
 		 				"5"=>$reg->serie_comprobante.' '.$reg->num_comprobante,
 		 				"6"=>$reg->total_compra,
-		 				"7"=>($reg->estado==1)?'<span class="label bg-green">Aceptado</span>':
+		 				"7"=>($reg->condicion)?'<span class="label bg-green">Aceptado</span>':
 		 				'<span class="label bg-red">Anulado</span>'
 		 				);
 		 		}

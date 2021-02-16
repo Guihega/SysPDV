@@ -9775,7 +9775,7 @@ a.btn:not([href]):not([tabindex]) {
   button.btn + .btn,
   .btn:not(.close):not(.mfp-close) + .btn,
   a.btn:not([href]):not([tabindex]) + .btn {
-    margin-left: 4px; }
+    margin-left: 0; }
   button.btn .badge,
   .btn:not(.close):not(.mfp-close) .badge,
   a.btn:not([href]):not([tabindex]) .badge {

@@ -13,7 +13,7 @@ Class Venta
 	//Implementamos un método para insertar registros
 	public function insertar($idcliente,$idusuario,$idcomprobante,$serie_comprobante,$num_comprobante,$fecha_hora,$impuesto,$total_venta,$idarticulo,$cantidad,$precio_venta,$descuento)
 	{
-		$sql="INSERT INTO venta (idcliente,idusuario,idcomprobante,serie_comprobante,num_comprobante,fecha_hora,impuesto,total_venta,estado)
+		$sql="INSERT INTO venta (idcliente,idusuario,idcomprobante,serie_comprobante,num_comprobante,fecha_hora,impuesto,total_venta,condicion)
 		VALUES ('$idcliente','$idusuario','$idcomprobante','$serie_comprobante','$num_comprobante','$fecha_hora','$impuesto','$total_venta',1)";
 		$idventanew=ejecutarConsulta_retornarID($sql);
 
@@ -22,7 +22,7 @@ Class Venta
 
 		while ($num_elementos < count($idarticulo))
 		{
-			$sql_detalle = "INSERT INTO detalle_venta(idventa, idarticulo,cantidad,precio_venta,descuento, estado) VALUES ('$idventanew', '$idarticulo[$num_elementos]','$cantidad[$num_elementos]','$precio_venta[$num_elementos]','$descuento[$num_elementos]', 1)";
+			$sql_detalle = "INSERT INTO detalle_venta(idventa, idarticulo,cantidad,precio_venta,descuento, condicion) VALUES ('$idventanew', '$idarticulo[$num_elementos]','$cantidad[$num_elementos]','$precio_venta[$num_elementos]','$descuento[$num_elementos]', 1)";
 			ejecutarConsulta($sql_detalle) or $sw = false;
 			$num_elementos = $num_elementos + 1;
 		}
@@ -34,11 +34,11 @@ Class Venta
 	//Implementamos un método para anular la venta
 	public function anular($idventa,$idusuario)
 	{
-		//$sql="UPDATE venta SET estado='Anulado' WHERE idventa='$idventa'";
-		$sql="UPDATE venta SET total_venta = 0.00, estado = 0, idusuario='$idusuario' WHERE idventa = '$idventa'";
+		//$sql="UPDATE venta SET condicion='Anulado' WHERE idventa='$idventa'";
+		$sql="UPDATE venta SET total_venta = 0.00, condicion = 0, idusuario='$idusuario' WHERE idventa = '$idventa'";
 		ejecutarConsulta($sql);
 
-		$sql="UPDATE detalle_venta SET estado = 0 WHERE idventa = '$idventa'";
+		$sql="UPDATE detalle_venta SET condicion = 0 WHERE idventa = '$idventa'";
 		return ejecutarConsulta($sql);
 	}
 
@@ -46,7 +46,7 @@ Class Venta
 	//Implementar un método para mostrar los datos de un registro a modificar
 	public function mostrar($idventa)
 	{
-		$sql="SELECT v.idventa,DATE(v.fecha_hora) as fecha,v.idcliente,p.nombre as cliente,u.idusuario,u.nombre as usuario,v.idcomprobante,v.serie_comprobante,v.num_comprobante,v.total_venta,v.impuesto,v.estado FROM venta v INNER JOIN persona p ON v.idcliente=p.idpersona INNER JOIN usuario u ON v.idusuario=u.idusuario WHERE v.idventa='$idventa'";
+		$sql="SELECT v.idventa,DATE(v.fecha_hora) as fecha,v.idcliente,p.nombre as cliente,u.idusuario,u.nombre as usuario,v.idcomprobante,v.serie_comprobante,v.num_comprobante,v.total_venta,v.impuesto,v.condicion FROM venta v INNER JOIN persona p ON v.idcliente=p.idpersona INNER JOIN usuario u ON v.idusuario=u.idusuario WHERE v.idventa='$idventa'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
@@ -59,7 +59,7 @@ Class Venta
 	//Implementar un método para listar los registros
 	public function listar()
 	{
-		$sql="SELECT v.idventa,DATE(v.fecha_hora) as fecha,v.idcliente,p.nombre as cliente,u.idusuario,u.nombre as usuario,c.nombre as documento,v.serie_comprobante,v.num_comprobante,v.total_venta,v.impuesto,v.estado FROM venta v INNER JOIN persona p ON v.idcliente=p.idpersona INNER JOIN usuario u ON v.idusuario=u.idusuario INNER JOIN comprobante c ON v.idcomprobante = c.idcomprobante ORDER by v.idventa desc";
+		$sql="SELECT v.idventa,DATE(v.fecha_hora) as fecha,v.idcliente,p.nombre as cliente,u.idusuario,u.nombre as usuario,c.nombre as documento,v.serie_comprobante,v.num_comprobante,v.total_venta,v.impuesto,v.condicion FROM venta v INNER JOIN persona p ON v.idcliente=p.idpersona INNER JOIN usuario u ON v.idusuario=u.idusuario INNER JOIN comprobante c ON v.idcomprobante = c.idcomprobante ORDER by v.idventa desc";
 		return ejecutarConsulta($sql);		
 	}
 

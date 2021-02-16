@@ -199,7 +199,7 @@ function mostrar(idmoneda)
 }
 
 //Función para desactivar registros
-function desactivar(idmoneda, idusuariocambio)
+function desactivar(idmoneda)
 {
 	swal({
 	    title: '¿Está seguro de desactivar la moneda?',
@@ -234,7 +234,7 @@ function desactivar(idmoneda, idusuariocambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/moneda.php?op=desactivar",
-			        data: {idmoneda : idmoneda, idusuariocambio : idusuariocambio},
+			        data: {idmoneda : idmoneda},
 			        cache: false,
 			        success: function(response) {
 			        	console.log(response);
@@ -275,7 +275,7 @@ function desactivar(idmoneda, idusuariocambio)
 }
 
 //Función para activar registros
-function activar(idmoneda, idusuariocambio)
+function activar(idmoneda)
 {
 	swal({
 	    title: '¿Está seguro de activar la moneda?',
@@ -309,7 +309,7 @@ function activar(idmoneda, idusuariocambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/moneda.php?op=activar",
-			        data: {idmoneda : idmoneda, idusuariocambio : idusuariocambio},
+			        data: {idmoneda : idmoneda},
 			        cache: false,
 			        success: function(response) {
 			            if (response == 0) {

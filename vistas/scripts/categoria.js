@@ -176,7 +176,7 @@ function mostrar(idcategoria)
 }
 
 //Función para desactivar registros
-function desactivar(idcategoria,idUsuarioCambio)
+function desactivar(idcategoria)
 {
 	swal({
 	    title: '¿Está seguro de desactivar la categoría?',
@@ -210,7 +210,7 @@ function desactivar(idcategoria,idUsuarioCambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/categoria.php?op=desactivar",
-			        data: {idcategoria : idcategoria, idUsuarioCambio : idUsuarioCambio},
+			        data: {idcategoria : idcategoria},
 			        cache: false,
 			        success: function(response) {
 			            if (response == 0) {
@@ -250,7 +250,7 @@ function desactivar(idcategoria,idUsuarioCambio)
 }
 
 //Función para activar registros
-function activar(idcategoria,idUsuarioCambio)
+function activar(idcategoria)
 {
 	swal({
 	    title: '¿Está seguro de activar la categoría?',
@@ -284,7 +284,7 @@ function activar(idcategoria,idUsuarioCambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/categoria.php?op=activar",
-			        data: {idcategoria : idcategoria, idUsuarioCambio : idUsuarioCambio},
+			        data: {idcategoria : idcategoria},
 			        cache: false,
 			        success: function(response) {
 			            if (response == 0) {

@@ -181,80 +181,7 @@ function mostrar(idpersona)
  	})
 }
 
-//Función para eliminar registros
-// function eliminar(idpersona)
-// {
-// 	swal({
-// 	    title: '¿Está seguro de eliminar el proveedor?',
-// 	    icon: "warning",
-// 	    buttons: true,
-// 	    showCancelButton: true,
-// 	    buttons:{
-// 		  cancel: {
-// 		    text: "Cancelar",
-// 		    value: true,
-// 		    visible: true,
-// 		    className: "",
-// 		    closeModal: true,
-// 		  },
-// 		  confirm: {
-// 		    text: "Aceptar",
-// 		    //value: true,
-// 		    value: "Aceptar",
-// 		    visible: true,
-// 		    className: "",
-// 		    closeModal: true
-// 		  }
-// 		},
-// 	    dangerMode: true,
-// 	    buttonsStyling: true,
-// 	    closeOnEsc: false,
-// 	    closeOnClickOutside: false
-// 		}).then((value) => {
-// 		switch (value) {
-// 			case "Aceptar":
-// 			  	$.ajax({
-// 			        type: "POST",
-// 			        url: "../ajax/persona.php?op=eliminar",
-// 			        data: {idpersona : idpersona},
-// 			        cache: false,
-// 			        success: function(response) {
-// 			            if (response == 0) {
-// 				    		icono = 'success';
-// 				    		mensaje = 'Proveedor eliminado';
-// 				    	}
-// 				    	else if (response == 1) {
-// 				    		icono = 'error';
-// 				    		mensaje = 'El proveedor no se pudo eliminar';
-// 				    	}
-
-// 				    	Swal.fire({
-// 					      position: 'top-end',
-// 					      icon: icono,
-// 					      title: mensaje,
-// 					      showConfirmButton: false,
-// 					      timer: 3000,
-// 					      showClass: {
-// 					        popup: 'animate__animated animate__fadeInDown'
-// 					      },
-// 					      hideClass: {
-// 					        popup: 'animate__animated animate__fadeOutUp'
-// 					      },
-// 					      showCloseButton: true,
-// 					      focusConfirm: false,
-// 					      timerProgressBar: true,
-// 					    });
-					    
-// 					    tabla.ajax.reload();
-// 			        }
-// 			    });
-// 			  	break;
-// 			default:
-// 		  		break;
-// 		}
-// 	});
-// }
-function desactivar(idpersona, idUsuarioCambio)
+function desactivar(idpersona)
 {
 	swal({
 	    title: '¿Está seguro de desactivar el proveedor?',
@@ -288,7 +215,7 @@ function desactivar(idpersona, idUsuarioCambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/persona.php?op=desactivar",
-			        data: {idpersona : idpersona, idUsuarioCambio : idUsuarioCambio},
+			        data: {idpersona : idpersona},
 			        cache: false,
 			        success: function(response) {
 			            if (response == 0) {
@@ -327,7 +254,7 @@ function desactivar(idpersona, idUsuarioCambio)
 	});
 }
 
-function activar(idpersona, idUsuarioCambio)
+function activar(idpersona)
 {
 	swal({
 	    title: '¿Está seguro de activar el proveedor?',
@@ -361,7 +288,7 @@ function activar(idpersona, idUsuarioCambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/persona.php?op=activar",
-			        data: {idpersona : idpersona, idUsuarioCambio : idUsuarioCambio},
+			        data: {idpersona : idpersona},
 			        cache: false,
 			        success: function(response) {
 			            if (response == 0) {

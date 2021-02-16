@@ -71,6 +71,7 @@ Class Usuario
 	{
 		$sql="UPDATE usuario SET clave='$clave', idUsuarioCambio='$idUsuarioCambio' WHERE idusuario='$idusuario' AND email='$email' AND login='$login'";
 		return ejecutarConsulta($sql);
+		//return $sql;
 	}
 }
 

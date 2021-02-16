@@ -212,7 +212,7 @@ function mostrar(idvista)
 }
 
 //Función para desactivar registros
-function desactivar(idvista, idusuariocambio)
+function desactivar(idvista)
 {
 	swal({
 	    title: '¿Está seguro de desactivar la vista?',
@@ -247,7 +247,7 @@ function desactivar(idvista, idusuariocambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/vista.php?op=desactivar",
-			        data: {idvista : idvista, idusuariocambio : idusuariocambio},
+			        data: {idvista : idvista},
 			        cache: false,
 			        success: function(response) {
 			        	console.log(response);
@@ -288,7 +288,7 @@ function desactivar(idvista, idusuariocambio)
 }
 
 //Función para activar registros
-function activar(idvista, idusuariocambio)
+function activar(idvista)
 {
 	swal({
 	    title: '¿Está seguro de activar la vista?',
@@ -322,7 +322,7 @@ function activar(idvista, idusuariocambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/vista.php?op=activar",
-			        data: {idvista : idvista, idusuariocambio : idusuariocambio},
+			        data: {idvista : idvista},
 			        cache: false,
 			        success: function(response) {
 			            if (response == 0) {

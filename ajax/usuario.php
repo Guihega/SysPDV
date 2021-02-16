@@ -25,12 +25,12 @@ $num_documento=isset($_POST["num_documento"])? limpiarCadena($_POST["num_documen
 $direccion=isset($_POST["direccion"])? limpiarCadena($_POST["direccion"]):"";
 $telefono=isset($_POST["telefono"])? limpiarCadena($_POST["telefono"]):"";
 $email=isset($_POST["email"])? limpiarCadena($_POST["email"]):"";
-$emailPassword=isset($_POST["emailPassword"])? limpiarCadena($_POST["emailPassword"]):"";
+//$emailPassword=isset($_POST["emailPassword"])? limpiarCadena($_POST["emailPassword"]):"";
 $cargo=isset($_POST["cargo"])? limpiarCadena($_POST["cargo"]):"";
 $login=isset($_POST["login"])? limpiarCadena($_POST["login"]):"";
-$loginPassword=isset($_POST["loginPassword"])? limpiarCadena($_POST["loginPassword"]):"";
+//$loginPassword=isset($_POST["loginPassword"])? limpiarCadena($_POST["loginPassword"]):"";
 $clave=isset($_POST["clave"])? limpiarCadena($_POST["clave"]):"";
-$clavePassword=isset($_POST["clavePassword"])? limpiarCadena($_POST["clavePassword"]):"";
+//$clavePassword=isset($_POST["clavePassword"])? limpiarCadena($_POST["clavePassword"]):"";
 $imagen=isset($_POST["imagen"])? limpiarCadena($_POST["imagen"]):"";
 $idUsuarioCambio = $_SESSION['idusuario'];
 $idgrupo = isset($_POST["idgrupo"])? limpiarCadena($_POST["idgrupo"]):"";
@@ -145,11 +145,11 @@ switch ($_GET["op"]){
 
 		 		while ($reg=$rspta->fetch_object()){
 		 			$data[]=array(
-		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idusuario.',1)"><i class="fa fa-edit"></i></button>'.
-		 					'<button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idusuario.','.$idUsuarioCambio.')"><i class="fa fa-close"></i></button>'.
-		 					'<button class="btn btn-xs btn-success" onclick="mostrar('.$reg->idusuario.',2)"><i class="fa fa-key"></i></button>':
-		 					'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idusuario.')"><i class="fa fa-eye"></i></button>'.
-		 					' <button class="btn btn-xs btn-primary" onclick="activar('.$reg->idusuario.','.$idUsuarioCambio.')"><i class="fa fa-check"></i></button>',
+		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idusuario.')" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>'.
+	 					' <button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idusuario.')" data-toggle="tooltip" data-placement="top" title="Desactivar"><i class="fa fa-close"></i></button>'.
+	 					' <button class="btn btn-xs btn-success" onclick="mostrar('.$reg->idusuario.',2)" data-toggle="tooltip" data-placement="top" title="Cambiar contraseña"><i class="fa fa-key"></i></button>':
+	 					' <button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idusuario.')" data-toggle="tooltip" title="Ver"><i class="fa fa-eye"></i></button>'.
+	 					' <button class="btn btn-xs btn-primary" onclick="activar('.$reg->idusuario.')"data-toggle="tooltip" title="Activar"><i class="fa fa-check"></i></button>',
 		 				"1"=>$reg->nombre,
 		 				"2"=>$reg->tipo_documento,
 		 				"3"=>$reg->num_documento,
@@ -251,7 +251,7 @@ switch ($_GET["op"]){
 	    echo json_encode($fetch);
 	break;
 
-	case 'acutalizarPassword':
+	case 'actualizarPassword':
 		if (!isset($_SESSION["nombre"]))
 		{
 		 	header("Location: ../vistas/login.php");//Validamos el acceso solo a los usuarios logueados al sistema.
@@ -259,9 +259,13 @@ switch ($_GET["op"]){
 		else
 		{
 			if ($_SESSION[$permisovista]==1){
-				$clavehash=hash("SHA256",$claveUpdate);
-				$rspta=$usuario->actualizarPassword($idusuarioPassword,$idUsuarioCambio,$emailPassword,$loginPassword,$clavehash);
+				$emailPassword=$_POST['emailPassword'];
+				$usernamePassword=$_POST['loginPassword'];
+		    	$passwordUpdate=$_POST['clavePassword'];
+				$clavehash=hash("SHA256",$passwordUpdate);
+				$rspta=$usuario->actualizarPassword($idusuarioPassword,$idUsuarioCambio,$emailPassword,$usernamePassword,$clavehash);
 				echo $rspta ? 0 : 1;
+				//echo $rspta ? $rspta : $rspta;
 			}
 			else
 			{

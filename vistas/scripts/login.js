@@ -46,21 +46,6 @@ function validarUsuario(e){
   });
 }
 
-// function configuracion(){
-//   // $.post("../ajax/configuracion.php?op=listarActiva", function(data, status)
-//   // {
-//   //   data = JSON.parse(data);
-//   //   $(".empresa").val(data.nombre);
-//   //   // $(".login-page").val(data.alias);
-//   // });
-//   $.post("../ajax/configuracion.php?op=listarActiva", function(data){
-//     //data = JSON.parse(data);
-//     //$(".empresa").val(data.nombre);
-//     // $("#idcategoria").html(r);
-//     // $('#idcategoria').selectpicker('refresh');
-//   });
-// }
-
 function showHidePwd(){
   $('#clavea').attr('type', $('#clavea').is(':password') ? 'text' : 'password');
   if ($('#clavea').attr('type') === 'password') {

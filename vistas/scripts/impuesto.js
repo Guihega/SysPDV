@@ -176,13 +176,10 @@ function mostrar(idimpuesto)
 		$("#idimpuesto").val(data.idimpuesto);
 
  	});
- // 	$.post("../ajax/Impuesto.php?op=permisos&id="+idimpuesto,function(r){
- // 		$("#permisos").empty().append(r);
-	// });
 }
 
 //Función para desactivar registros
-function desactivar(idimpuesto, idusuariocambio)
+function desactivar(idimpuesto)
 {
 	swal({
 	    title: '¿Está seguro de desactivar la impuesto?',
@@ -217,7 +214,7 @@ function desactivar(idimpuesto, idusuariocambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/impuesto.php?op=desactivar",
-			        data: {idimpuesto : idimpuesto, idusuariocambio : idusuariocambio},
+			        data: {idimpuesto : idimpuesto},
 			        cache: false,
 			        success: function(response) {
 			        	console.log(response);
@@ -258,7 +255,7 @@ function desactivar(idimpuesto, idusuariocambio)
 }
 
 //Función para activar registros
-function activar(idimpuesto, idusuariocambio)
+function activar(idimpuesto)
 {
 	swal({
 	    title: '¿Está seguro de activar el impuesto?',
@@ -292,7 +289,7 @@ function activar(idimpuesto, idusuariocambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/impuesto.php?op=activar",
-			        data: {idimpuesto : idimpuesto, idusuariocambio : idusuariocambio},
+			        data: {idimpuesto : idimpuesto},
 			        cache: false,
 			        success: function(response) {
 			            if (response == 0) {

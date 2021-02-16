@@ -41,22 +41,6 @@ function cargarCategorias(){
 	});
 }
 
-// function configuracion(){
-//   // $.post("../ajax/configuracion.php?op=listarActiva", function(data, status)
-//   // {
-//   //   data = JSON.parse(data);
-//   //   $(".empresa").val(data.nombre);
-//   //   // $(".login-page").val(data.alias);
-//   // });
-//   $.post("../ajax/configuracion.php?op=listarActiva", function(data){
-//     //data = JSON.parse(data);
-//     //$(".empresa").val(data.nombre);
-//     // $("#idcategoria").html(r);
-//     // $('#idcategoria').selectpicker('refresh');
-//   });
-// }
-
-
 //Función limpiar
 function limpiar()
 {
@@ -249,7 +233,7 @@ function mostrar(idarticulo)
 }
 
 //Función para desactivar registros
-function desactivar(idarticulo,idUsuarioCambio)
+function desactivar(idarticulo)
 {
 	swal({
 	    title: '¿Está seguro de desactivar el artículo?',
@@ -283,7 +267,7 @@ function desactivar(idarticulo,idUsuarioCambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/articulo.php?op=desactivar",
-			        data: {idarticulo : idarticulo, idUsuarioCambio:idUsuarioCambio},
+			        data: {idarticulo : idarticulo},
 			        cache: false,
 			        success: function(response) {
 			            if (response == 0) {
@@ -325,7 +309,7 @@ function desactivar(idarticulo,idUsuarioCambio)
 
 
 //Función para activar registros
-function activar(idarticulo,idUsuarioCambio)
+function activar(idarticulo)
 {
 	swal({
 	    title: '¿Está seguro de activar el artículo?',
@@ -359,7 +343,7 @@ function activar(idarticulo,idUsuarioCambio)
 	      	$.ajax({
 		        type: "POST",
 		        url: "../ajax/articulo.php?op=activar",
-		        data: {idarticulo : idarticulo, idUsuarioCambio:idUsuarioCambio},
+		        data: {idarticulo : idarticulo},
 		        cache: false,
 		        success: function(response) {
 		            if (response == 0) {

@@ -5,6 +5,8 @@ $conexion = new mysqli(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_NAME);
 
 mysqli_query( $conexion, 'SET NAMES "'.DB_ENCODE.'"');
 //mysqli_query($conn, "SET SESSION sql_mode = 'TRADITIONAL'");
+//mysqli_query($conn, "SET GLOBAL sql_mode= (SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY','')");
+//SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''))
 
 //Si tenemos un posible error en la conexión lo mostramos
 if (mysqli_connect_errno())

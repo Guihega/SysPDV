@@ -67,10 +67,10 @@ else
 
 		 		while ($reg=$rspta->fetch_object()){
 		 			$data[]=array(
-		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idcategoria.')"><i class="fa fa-edit"></i></button>'.
-		 					' <button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idcategoria.','.$idUsuarioCambio.')"><i class="fa fa-close"></i></button>':
-		 					'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idcategoria.')"><i class="fa fa-eye"></i></button>'.
-		 					' <button class="btn  btn-xs btn-primary" onclick="activar('.$reg->idcategoria.','.$idUsuarioCambio.')"><i class="fa fa-check"></i></button>',
+		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idcategoria.')" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>'.
+		 					' <button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idcategoria.')"  data-toggle="tooltip" data-placement="top" title="Desactivar"><i class="fa fa-close"></i></button>':
+		 					'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idcategoria.')" data-toggle="tooltip" title="Ver"><i class="fa fa-eye"></i></button>'.
+		 					' <button class="btn btn-xs btn-primary" onclick="activar('.$reg->idcategoria.')"data-toggle="tooltip" title="Activar"><i class="fa fa-check"></i></button>',
 		 				"1"=>$reg->nombre,
 		 				"2"=>$reg->descripcion,
 		 				"3"=>($reg->condicion)?'<span class="label bg-green">Activado</span>':

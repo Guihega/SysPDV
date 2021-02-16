@@ -78,12 +78,10 @@ else
 
 		 		while ($reg=$rspta->fetch_object()){
 		 			$data[]=array(
-		 				// "0"=>'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idpersona.')"><i class="fa fa-edit"></i></button>'.
-		 				// 	' <button class="btn btn-xs btn-danger" onclick="eliminar('.$reg->idpersona.')"><i class="fa fa-trash"></i></button>',
-		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idpersona.')"><i class="fa fa-edit"></i></button>'.
-		 					'<button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idpersona.','.$idUsuarioCambio.')"><i class="fa fa-close"></i></button>':
-		 					'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idpersona.')"><i class="fa fa-eye"></i></button>'.
-		 					' <button class="btn btn-xs btn-primary" onclick="activar('.$reg->idpersona.','.$idUsuarioCambio.')"><i class="fa fa-check"></i></button>',
+		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idpersona.')" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>'.
+	 					' <button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idpersona.')"  data-toggle="tooltip" data-placement="top" title="Desactivar"><i class="fa fa-close"></i></button>':
+	 					'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idpersona.')" data-toggle="tooltip" title="Ver"><i class="fa fa-eye"></i></button>'.
+	 					' <button class="btn btn-xs btn-primary" onclick="activar('.$reg->idpersona.')"data-toggle="tooltip" title="Activar"><i class="fa fa-check"></i></button>',
 		 				"1"=>$reg->nombre,
 		 				"2"=>$reg->tipo_documento,
 		 				"3"=>$reg->num_documento,
@@ -109,12 +107,10 @@ else
 
 		 		while ($reg=$rspta->fetch_object()){
 		 			$data[]=array(
-		 				// "0"=>'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idpersona.')"><i class="fa fa-edit"></i></button>'.
-		 				// 	' <button class="btn btn-xs btn-danger" onclick="eliminar('.$reg->idpersona.')"><i class="fa fa-trash"></i></button>',
-		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idpersona.')"><i class="fa fa-edit"></i></button>'.
-		 					'<button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idpersona.','.$idUsuarioCambio.')"><i class="fa fa-close"></i></button>':
-		 					'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idpersona.')"><i class="fa fa-eye"></i></button>'.
-		 					' <button class="btn btn-xs btn-primary" onclick="activar('.$reg->idpersona.','.$idUsuarioCambio.')"><i class="fa fa-check"></i></button>',
+		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idpersona.')" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>'.
+	 					' <button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idpersona.')" data-toggle="tooltip" data-placement="top" title="Desactivar"><i class="fa fa-close"></i></button>':
+	 					'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idpersona.')" data-toggle="tooltip" title="Ver"><i class="fa fa-eye"></i></button>'.
+	 					' <button class="btn btn-xs btn-primary" onclick="activar('.$reg->idpersona.')"data-toggle="tooltip" title="Activar"><i class="fa fa-check"></i></button>',
 		 				"1"=>$reg->nombre,
 		 				"1"=>$reg->nombre,
 		 				"2"=>$reg->tipo_documento,

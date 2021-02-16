@@ -13,7 +13,7 @@ Class Ingreso
 	//Implementamos un método para insertar registros
 	public function insertar($idproveedor,$idusuario,$idcomprobante,$serie_comprobante,$num_comprobante,$fecha_hora,$impuesto,$total_compra,$idarticulo,$cantidad,$precio_compra,$precio_venta)
 	{
-		$sql="INSERT INTO ingreso (idproveedor,idusuario,idcomprobante,serie_comprobante,num_comprobante,fecha_hora,impuesto,total_compra,estado)
+		$sql="INSERT INTO ingreso (idproveedor,idusuario,idcomprobante,serie_comprobante,num_comprobante,fecha_hora,impuesto,total_compra,condicion)
 		VALUES ('$idproveedor','$idusuario','$idcomprobante','$serie_comprobante','$num_comprobante','$fecha_hora','$impuesto','$total_compra',1)";
 		//return ejecutarConsulta($sql);
 		$idingresonew=ejecutarConsulta_retornarID($sql);
@@ -23,7 +23,7 @@ Class Ingreso
 
 		while ($num_elementos < count($idarticulo))
 		{
-			$sql_detalle = "INSERT INTO detalle_ingreso(idingreso, idarticulo,cantidad,precio_compra,precio_venta,estado) VALUES ('$idingresonew', '$idarticulo[$num_elementos]','$cantidad[$num_elementos]','$precio_compra[$num_elementos]','$precio_venta[$num_elementos]',1)";
+			$sql_detalle = "INSERT INTO detalle_ingreso(idingreso, idarticulo,cantidad,precio_compra,precio_venta,condicion) VALUES ('$idingresonew', '$idarticulo[$num_elementos]','$cantidad[$num_elementos]','$precio_compra[$num_elementos]','$precio_venta[$num_elementos]',1)";
 			ejecutarConsulta($sql_detalle) or $sw = false;
 			$num_elementos=$num_elementos + 1;
 		}
@@ -35,11 +35,11 @@ Class Ingreso
 	//Implementamos un método para anular categorías
 	public function anular($idingreso,$idusuario)
 	{
-		//$sql="UPDATE ingreso SET estado = 'Anulado' WHERE idingreso='$idingreso'";
-		$sql="UPDATE ingreso SET total_compra = 0.00,  estado = 0 , idusuario='$idusuario' WHERE idingreso = '$idingreso'";
+		//$sql="UPDATE ingreso SET condicion = 'Anulado' WHERE idingreso='$idingreso'";
+		$sql="UPDATE ingreso SET total_compra = 0.00,  condicion = 0 , idusuario='$idusuario' WHERE idingreso = '$idingreso'";
 		ejecutarConsulta($sql);
 
-		$sql="UPDATE detalle_ingreso SET estado = 0 WHERE idingreso = '$idingreso'";
+		$sql="UPDATE detalle_ingreso SET condicion = 0 WHERE idingreso = '$idingreso'";
 		return ejecutarConsulta($sql);
 	}
 
@@ -47,7 +47,7 @@ Class Ingreso
 	//Implementar un método para mostrar los datos de un registro a modificar
 	public function mostrar($idingreso)
 	{
-		$sql="SELECT i.idingreso,DATE(i.fecha_hora) as fecha,i.idproveedor,p.nombre as proveedor,u.idusuario,u.nombre as usuario,i.idcomprobante,i.serie_comprobante,i.num_comprobante,i.total_compra,i.impuesto,i.estado FROM ingreso i INNER JOIN persona p ON i.idproveedor=p.idpersona INNER JOIN usuario u ON i.idusuario=u.idusuario WHERE i.idingreso='$idingreso'";
+		$sql="SELECT i.idingreso,DATE(i.fecha_hora) as fecha,i.idproveedor,p.nombre as proveedor,u.idusuario,u.nombre as usuario,i.idcomprobante,i.serie_comprobante,i.num_comprobante,i.total_compra,i.impuesto,i.condicion FROM ingreso i INNER JOIN persona p ON i.idproveedor=p.idpersona INNER JOIN usuario u ON i.idusuario=u.idusuario WHERE i.idingreso='$idingreso'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
@@ -60,7 +60,7 @@ Class Ingreso
 	//Implementar un método para listar los registros
 	public function listar()
 	{
-		$sql="SELECT i.idingreso,DATE(i.fecha_hora) as fecha,i.idproveedor,p.nombre as proveedor,u.idusuario,u.nombre as usuario,c.nombre as documento,i.serie_comprobante,i.num_comprobante,i.total_compra,i.impuesto,i.estado FROM ingreso i INNER JOIN persona p ON i.idproveedor=p.idpersona INNER JOIN usuario u ON i.idusuario=u.idusuario INNER JOIN comprobante c ON i.idcomprobante = c.idcomprobante ORDER BY i.idingreso desc";
+		$sql="SELECT i.idingreso,DATE(i.fecha_hora) as fecha,i.idproveedor,p.nombre as proveedor,u.idusuario,u.nombre as usuario,c.nombre as documento,i.serie_comprobante,i.num_comprobante,i.total_compra,i.impuesto,i.condicion FROM ingreso i INNER JOIN persona p ON i.idproveedor=p.idpersona INNER JOIN usuario u ON i.idusuario=u.idusuario INNER JOIN comprobante c ON i.idcomprobante = c.idcomprobante ORDER BY i.idingreso desc";
 		return ejecutarConsulta($sql);		
 	}
 	

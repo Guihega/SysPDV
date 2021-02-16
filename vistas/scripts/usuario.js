@@ -466,7 +466,7 @@ function actualizarPassword(e){
 		console.log(value);
 	}
 	$.ajax({
-		url: "../ajax/usuario.php?op=acutalizarPassword",
+		url: "../ajax/usuario.php?op=actualizarPassword",
 	    type: "POST",
 	    data: formData,
 	    contentType: false,
@@ -474,7 +474,7 @@ function actualizarPassword(e){
 	    success: function(datos)
 	    {
 			//bootbox.alert(datos);
-			//console.log(datos);
+			console.log(datos);
 			if (datos == 0) {
 	    		icono = 'success';
 	    		mensaje = 'Contraseña actualizada';

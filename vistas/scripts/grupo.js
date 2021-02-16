@@ -223,7 +223,7 @@ function mostrar(idgrupo)
 }
 
 //Función para desactivar registros
-function desactivar(idgrupo, idgrupocambio)
+function desactivar(idgrupo)
 {
 	swal({
 	    title: '¿Está seguro de desactivar el grupo?',
@@ -258,7 +258,7 @@ function desactivar(idgrupo, idgrupocambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/grupo.php?op=desactivar",
-			        data: {idgrupo : idgrupo, idgrupoCambio : idgrupocambio},
+			        data: {idgrupo : idgrupo},
 			        cache: false,
 			        success: function(response) {
 			        	console.log(response);
@@ -299,7 +299,7 @@ function desactivar(idgrupo, idgrupocambio)
 }
 
 //Función para activar registros
-function activar(idgrupo, idgrupocambio)
+function activar(idgrupo)
 {
 	swal({
 	    title: '¿Está seguro de activar el grupo?',
@@ -333,7 +333,7 @@ function activar(idgrupo, idgrupocambio)
 			  	$.ajax({
 			        type: "POST",
 			        url: "../ajax/grupo.php?op=activar",
-			        data: {idgrupo : idgrupo, idgrupoCambio : idgrupocambio},
+			        data: {idgrupo : idgrupo},
 			        cache: false,
 			        success: function(response) {
 			            if (response == 0) {

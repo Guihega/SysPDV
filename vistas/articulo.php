@@ -13,8 +13,6 @@ else
   $configuracion = new Configuracion();
   $rsptaConfig = $configuracion->listarActiva();
   $regConfig=$rsptaConfig->fetch_object();
-  //$config=$regConfig->total_venta;
-  //echo $regConfig->empresa;
 
   if (isset($regConfig))
   {
@@ -65,7 +63,7 @@ else
               <div class="box-tools pull-right exportButtons">
               </div>
               <div class="box-tools pull-right btnAcciones">
-                <button class="btn btn-sm btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar</button>
+                <button class="btn btn-sm btn-success" id="btnagregar" onclick="mostrarform(true)" data-toggle="tooltip" data-placement="top" title="Agregar articulo"><i class="fa fa-plus-circle"></i> Agregar</button>
                 <a href="../reportes/rptarticulos.php" target="_blank">
                   <button class="btn btn-sm btn-info"><i class="fa fa-clipboard"></i> Reporte</button>
                 </a>
