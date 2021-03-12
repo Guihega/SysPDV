@@ -5,7 +5,7 @@ if (strlen(session_id()) < 1){
 }
 if (!isset($_SESSION["nombre"]))
 {
-  header("Location: ../vistas/login.html");//Validamos el acceso solo a los usuarios logueados al sistema.
+  header("Location: ../vistas/login.php");//Validamos el acceso solo a los usuarios logueados al sistema.
 }
 else
 {
@@ -35,8 +35,8 @@ else
 		$fecha_hora=isset($_POST["fecha_hora"])? limpiarCadena($_POST["fecha_hora"]):"";
 		$impuesto=isset($_POST["impuesto"])? limpiarCadena($_POST["impuesto"]):"";
 		$total_venta=isset($_POST["total_venta"])? limpiarCadena($_POST["total_venta"]):"";
-
 		$codigoBarras=isset($_POST["codigoBarras"])? limpiarCadena($_POST["codigoBarras"]):"";
+		$idproducto=isset($_POST["idproducto"])? limpiarCadena($_POST["idproducto"]):"";
 
 		switch ($_GET["op"]){
 			case 'guardaryeditar':
@@ -86,7 +86,7 @@ else
 		                <th></th>
 		                <th></th>
 		                <th></th>
-		                <th><h4 id="total">S/.'.$total.'</h4><input type="hidden" name="total_venta" id="total_venta"></th> 
+		                <th><span id="simboloMoneda">'.$_SESSION['simbolo'].'</span><label id="total"> '.$total.'</label><input type="hidden" name="total_venta" id="total_venta"></th>
 		            </tfoot>';
 			break;
 
@@ -104,10 +104,12 @@ else
 		 			}
 
 		 			$data[]=array(
-		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idventa.')" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>'.
-	 					' <button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idventa.')" data-toggle="tooltip" data-placement="top" title="Desactivar"><i class="fa fa-close"></i></button>':
+		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idventa.')" data-toggle="tooltip" title="Ver"><i class="fa fa-eye"></i></button>'.
+	 					' <button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idventa.')" data-toggle="tooltip" data-placement="top" title="Desactivar"><i class="fa fa-close"></i></button>'.
+	 					'<a target="_blank" href="'.$url.$reg->idventa.'"> <button class="btn btn-xs btn-info" data-toggle="tooltip" title="Comprobante"><i class="fa fa-file"></i></button></a>':
 	 					'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idventa.')" data-toggle="tooltip" title="Ver"><i class="fa fa-eye"></i></button>'.
-	 					' <button class="btn btn-xs btn-primary" onclick="activar('.$reg->idventa.')"data-toggle="tooltip" title="Activar"><i class="fa fa-check"></i></button>',
+	 					' <button class="btn btn-xs btn-primary" onclick="activar('.$reg->idventa.')" data-toggle="tooltip" title="Activar"><i class="fa fa-check"></i></button>'.
+	 					'<a target="_blank" href="'.$url.$reg->idventa.'"> <button class="btn btn-xs btn-info" data-toggle="tooltip" title="Comprobante"><i class="fa fa-file"></i></button></a>',
 		 				"1"=>$reg->fecha,
 		 				"2"=>$reg->cliente,
 		 				"3"=>$reg->usuario,
@@ -149,7 +151,6 @@ else
 		 
 		 		while ($reg=$rspta->fetch_object()){
 		 			$data[]=array(
-		 				// "0"=>'<button class="btn btn-xs btn-warning" onclick="agregarDetalle('.$reg->idarticulo.',\''.$reg->nombre.'\',\''.$reg->codigo.'\',\''.$reg->precio_venta.'\')"><span class="fa fa-plus"></span></button>',
 		 				"0"=>'<button class="btn btn-xs btn-warning" onclick="buscarArticuloId('.$reg->idarticulo.')"><span class="fa fa-plus"></span></button>',
 		 				"1"=>$reg->nombre,
 		 				"2"=>$reg->categoria,
@@ -170,7 +171,6 @@ else
 			case 'buscarArticuloBarCode':
 				require_once "../modelos/Articulo.php";
 				$articulo=new Articulo();
-
 				$rspta=$articulo->buscarArticuloBarCode($codigoBarras);
 		 		//Codificar el resultado utilizando json
 		 		echo json_encode($rspta);
@@ -179,7 +179,6 @@ else
 			case 'buscarArticuloId':
 				require_once "../modelos/Articulo.php";
 				$articulo=new Articulo();
-
 				$rspta=$articulo->buscarArticuloId($idproducto);
 		 		//Codificar el resultado utilizando json
 		 		echo json_encode($rspta);

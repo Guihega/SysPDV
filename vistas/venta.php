@@ -13,8 +13,6 @@ else
   $configuracion = new Configuracion();
   $rsptaConfig = $configuracion->listarActiva();
   $regConfig=$rsptaConfig->fetch_object();
-  //$config=$regConfig->total_venta;
-  //echo $regConfig->empresa;
 
   if (isset($regConfig))
   {
@@ -59,13 +57,20 @@ else
                   <h1>Venta</h1>
                 </div>
                 <div class="col-md-6">
-                  <div class="box-tools pull-right exportButtons">
-                  </div>
+                  <?php 
+                    if($_SESSION['reportes']){
+                      echo '<div class="box-tools pull-right exportButtons"></div>';
+                    }
+                  ?>
                   <div class="box-tools pull-right btnAcciones">
                       <button class="btn btn-sm btn btn-success" id="btnagregar" onclick="mostrarform(true,0)"><i class="fa fa-plus-circle"></i> Agregar</button>
-                      <a href="../reportes/rptarticulos.php" target="_blank">
-                        <button class="btn btn-sm btn btn-info"><i class="fa fa-clipboard"></i> Reporte</button>
-                      </a>
+                      <?php 
+                        if($_SESSION['reportes']){
+                          echo '<a href="../reportes/rptventas.php" target="_blank">
+                            <button class="btn btn-sm btn btn-info"><i class="fa fa-clipboard"></i> Reporte</button>
+                          </a>';
+                        }
+                      ?>
                   </div>
                 </div>
               </div>
@@ -130,7 +135,14 @@ else
                       <div class="input-group">
                         <select id="idcliente" name="idcliente" class="form-control selectpicker" data-live-search="true" required></select>
                         <span class="input-group-btn">
-                          <button class="btn btn-default" id="btnAgregarCliente" type="button" data-toggle="modal" data-target="#modalNuevoCliente"><i class="fa fa-plus"></i></button>
+                          <?php 
+                            if($_SESSION['configuracion']){
+                              echo '<button class="btn btn-default" id="btnAgregarCliente" type="button" data-toggle="modal" data-target="#modalNuevoCliente"><i class="fa fa-plus"></i></button>';
+                            }
+                            else{
+                              echo '<button class="btn btn-default" id="btnAgregarCliente" type="button" data-toggle="modal" data-target="#modalNuevoCliente" disabled><i class="fa fa-plus"></i></button>';
+                            }
+                          ?>
                         </span>
                       </div>
                     </div>
@@ -139,7 +151,14 @@ else
                       <div class="input-group">
                         <select name="idcomprobante" id="idcomprobante" class="form-control selectpicker" required=""></select>
                         <span class="input-group-btn">
-                          <button class="btn btn-default" id="btnAgregarComprobante" type="button" data-toggle="modal" data-target="#modalNuevocomprobante"><i class="fa fa-plus"></i></button>
+                          <?php 
+                            if($_SESSION['configuracion']){
+                              echo '<button class="btn btn-default" id="btnAgregarComprobante" type="button" data-toggle="modal" data-target="#modalNuevocomprobante"><i class="fa fa-plus"></i></button>';
+                            }
+                            else{
+                              echo '<button class="btn btn-default" id="btnAgregarComprobante" type="button" data-toggle="modal" data-target="#modalNuevocomprobante" disabled><i class="fa fa-plus"></i></button>';
+                            }
+                          ?>
                         </span>
                       </div>
                     </div>
@@ -169,12 +188,6 @@ else
                     <div class="form-group col-lg-2 col-md-2 col-sm-6 col-xs-12">
                       <label>Impuesto:</label>
                       <input type="text" class="form-control" name="impuesto" id="impuesto" required="">
-                      <!-- <div class="input-group">
-                        <select name="impuesto" id="impuesto" class="form-control selectpicker" required=""></select>
-                        <span class="input-group-btn">
-                          <button class="btn btn-default" id="btnAgregarImpuesto" type="button" data-toggle="modal" data-target="#modalNuevoImpuesto"><i class="fa fa-plus"></i></button>
-                        </span>
-                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -329,6 +342,22 @@ else
                   <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <label>Descripción:</label>
                     <input type="text" class="form-control" name="descripcionComprobante" id="descripcionComprobante" maxlength="256" placeholder="Descripción">
+                  </div>
+                  <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label>Tipo Comprobante:</label>
+                    <select class="form-control select-picker" name="tipocomprobante" id="tipocomprobante" required>
+                      <option value="Operación">Operación</option>
+                      <option value="Identificación">Identificación</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label>Impuesto:</label>
+                    <div class="input-group">
+                      <select name="impuestonombre" id="impuestonombre" class="form-control selectpicker" required=""></select>
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" id="btnAgregarImpuesto" type="button" data-toggle="modal" data-target="#modalNuevoImpuesto"><i class="fa fa-plus"></i></button>
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div class="modal-footer">

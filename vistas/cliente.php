@@ -13,8 +13,6 @@ else
   $configuracion = new Configuracion();
   $rsptaConfig = $configuracion->listarActiva();
   $regConfig=$rsptaConfig->fetch_object();
-  //$config=$regConfig->total_venta;
-  //echo $regConfig->empresa;
 
   if (isset($regConfig))
   {
@@ -65,7 +63,7 @@ else
                   </div>
                   <div class="box-tools pull-right btnAcciones">
                       <button class="btn btn-sm btn btn-success" id="btnagregar" onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar</button>
-                      <a href="../reportes/rptarticulos.php" target="_blank">
+                      <a href="../reportes/rptclientes.php" target="_blank">
                         <button class="btn btn-sm btn btn-info"><i class="fa fa-clipboard"></i> Reporte</button>
                       </a>
                   </div>
@@ -130,11 +128,7 @@ else
                 </div>
                 <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <label>Tipo Documento:</label>
-                  <select class="form-control select-picker" name="tipo_documento" id="tipo_documento" required>
-                    <option value="DNI">DNI</option>
-                    <option value="RUC">RUC</option>
-                    <option value="CEDULA">CEDULA</option>
-                  </select>
+                  <select class="form-control select-picker" name="tipo_documento" id="tipo_documento" required></select>
                 </div>
                 <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <label>Número Documento:</label>

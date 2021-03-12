@@ -116,19 +116,26 @@ else
                 <h4 class="modal-title">Nuevo Comprobante</h4>
               </div>
               <div class="modal-body">
-                <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <label>Nombre(*):</label>
                   <input type="hidden" name="idcomprobante" id="idcomprobante">
                   <input type="text" class="form-control" name="nombreComprobante" id="nombreComprobante" maxlength="50" placeholder="Nombre" required>
                 </div>
-                <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <label>Descripción:</label>
                   <input type="text" class="form-control" name="descripcionComprobante" id="descripcionComprobante" maxlength="256" placeholder="Descripción">
                 </div>
-                <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <label>Tipo Comprobante:</label>
+                  <select class="form-control select-picker" name="tipocomprobante" id="tipocomprobante" required>
+                    <option value="Operación">Operación</option>
+                    <option value="Identificación">Identificación</option>
+                  </select>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
                   <label>Impuesto:</label>
                   <div class="input-group">
-                    <select name="impuesto" id="impuesto" class="form-control selectpicker" required=""></select>
+                    <select name="impuestonombre" id="impuestonombre" class="form-control selectpicker" required=""></select>
                     <span class="input-group-btn">
                       <button class="btn btn-default" id="btnAgregarImpuesto" type="button" data-toggle="modal" data-target="#modalNuevoImpuesto"><i class="fa fa-plus"></i></button>
                     </span>

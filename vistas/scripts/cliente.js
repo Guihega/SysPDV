@@ -13,6 +13,17 @@ function init(){
 	
 	$('#mVentas').addClass("treeview active");
     $('#lClientes').addClass("active");
+
+    cargaComprobantes();
+}
+
+function cargaComprobantes(){
+	//Cargamos los items al select cliente
+	$.post("../ajax/comprobante.php?op=selectIdentificacion", function(r){
+        $("#tipo_documento").html(r);
+        $('#tipo_documento').selectpicker('refresh');
+        $("#tipo_documento").change();
+	});
 }
 
 //Función limpiar

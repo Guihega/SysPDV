@@ -170,7 +170,9 @@ if (strlen(session_id()) < 1)
               </a>
               <ul class="treeview-menu">
                 <li id="lConsultasC"><a href="comprasfecha.php"><i class="fa fa-circle-o"></i>Compras</a></li>
-                <li id="lConsultasV"><a href="ventasfechacliente.php"><i class="fa fa-circle-o"></i>Ventas</a></li>            
+                <li id="lConsultasV"><a href="ventasfechacliente.php"><i class="fa fa-circle-o"></i>Ventas</a></li>
+                <li id="lConsultasStock"><a href="consultastock.php"><i class="fa fa-circle-o"></i>Stock</a></li>
+                <li id="lConsultasCaducidad"><a href="consultacaducidad.php"><i class="fa fa-circle-o"></i>Caducidad</a></li>
               </ul>
             </li>';
             }

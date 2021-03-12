@@ -184,6 +184,8 @@ function mostrar(idcomprobante)
  		$("#idcomprobante").val(data.idcomprobante);
  		$("#impuesto").val(data.idimpuesto);
  		$("#impuesto").selectpicker('refresh');
+ 		$("#tipocomprobante").val(data.tipocomprobante);
+ 		$("#tipocomprobante").selectpicker('refresh');
  	})
 }
 

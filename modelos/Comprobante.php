@@ -11,17 +11,17 @@ Class Comprobante
 	}
 
 	//Implementamos un método para insertar registros
-	public function insertar($nombre,$descripcion,$idimpuesto,$idusuariocambio)
+	public function insertar($nombre,$descripcion,$tipocomprobante,$idimpuesto,$idusuariocambio)
 	{
-		$sql="INSERT INTO comprobante (nombre,descripcion,idimpuesto,condicion,idusuariocambio)
-		VALUES ('$nombre','$descripcion',$idimpuesto,1,'$idusuariocambio')";
+		$sql="INSERT INTO comprobante (nombre,descripcion,tipocomprobante,idimpuesto,condicion,idusuariocambio)
+		VALUES ('$nombre','$descripcion','$tipocomprobante',$idimpuesto,1,'$idusuariocambio')";
 		return ejecutarConsulta($sql);
 	}
 
 	//Implementamos un método para editar registros
-	public function editar($idcomprobante,$nombre,$descripcion,$idimpuesto,$idusuariocambio)
+	public function editar($idcomprobante,$nombre,$descripcion,$tipocomprobante,$idimpuesto,$idusuariocambio)
 	{
-		$sql="UPDATE comprobante SET nombre='$nombre',descripcion='$descripcion',idimpuesto= $idimpuesto,idusuariocambio='$idusuariocambio' WHERE idcomprobante='$idcomprobante'";
+		$sql="UPDATE comprobante SET nombre='$nombre',descripcion='$descripcion',tipocomprobante='$tipocomprobante',idimpuesto= $idimpuesto,idusuariocambio='$idusuariocambio' WHERE idcomprobante='$idcomprobante'";
 		return ejecutarConsulta($sql);
 	}
 
@@ -43,7 +43,7 @@ Class Comprobante
 	public function mostrar($idcomprobante)
 	{
 		//$sql="SELECT * from comprobante WHERE idcomprobante='$idcomprobante'";
-		$sql="SELECT c.idcomprobante, c.nombre, c.descripcion, i.idimpuesto FROM comprobante c INNER JOIN impuesto i ON c.idimpuesto = i.idimpuesto WHERE idcomprobante='$idcomprobante'";
+		$sql="SELECT c.idcomprobante, c.nombre, c.descripcion,c.tipocomprobante, i.idimpuesto FROM comprobante c INNER JOIN impuesto i ON c.idimpuesto = i.idimpuesto WHERE idcomprobante='$idcomprobante'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
@@ -56,7 +56,14 @@ Class Comprobante
 	//Implementar un método para listar los registros y mostrar en el select
 	public function select()
 	{
-		$sql="SELECT * FROM comprobante where condicion=1";
+		$sql="SELECT * FROM comprobante where condicion=1 and tipocomprobante='Operación'";
+		return ejecutarConsulta($sql);		
+	}
+
+	//Implementar un método para listar los registros y mostrar en el select
+	public function selectIdentificacion()
+	{
+		$sql="SELECT * FROM comprobante where condicion=1 and tipocomprobante='Identificación'";
 		return ejecutarConsulta($sql);		
 	}
 

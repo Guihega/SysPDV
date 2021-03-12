@@ -213,7 +213,7 @@ function mostrar(idgrupo)
 		mostrarform(true,1);
 
 		$(".modal-title").html('Editar Grupo ' + idgrupo);
-		$("#nombregrupoGrupo").val(data.nombregrupo);
+		$("#nombregrupo").val(data.nombre);
 		$("#idgrupo").val(data.idgrupo);
 
  	});

@@ -42,7 +42,7 @@ function init(){
 	
 	cargaComprobantes();
 
-	//cargaImpuestos();
+	cargaImpuestos();
 
 	$('#mCompras').addClass("treeview active");
     $('#lIngresos').addClass("active");
@@ -72,6 +72,14 @@ function cargaComprobantes(){
         $("#idcomprobante").html(r);
         $('#idcomprobante').selectpicker('refresh');
         $("#idcomprobante").change();
+	});
+}
+
+function cargaImpuestos(){
+	//Cargamos los items al select cliente
+	$.post("../ajax/impuesto.php?op=selectImpuesto", function(r){
+        $("#impuestonombre").html(r);
+        $('#impuestonombre').selectpicker('refresh');
 	});
 }
 
@@ -297,6 +305,7 @@ function mostrar(idingreso)
 		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
 		$("#btnAgregarArt").hide();
+		$("#btnAgregarComprobante").prop("disabled",true);
  	});
 
  	$.post("../ajax/ingreso.php?op=listarDetalle&id="+idingreso,function(r){

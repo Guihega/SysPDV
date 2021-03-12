@@ -101,7 +101,7 @@ function listar()
         },
 		"bDestroy": true,
 		"iDisplayLength": 5,//Paginación
-	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
+	    "order": [[ 1, "asc" ]]//Ordenar (columna,orden)
 	}).DataTable();
 
 	var buttons = new $.fn.dataTable.Buttons(tabla, {

@@ -12,7 +12,7 @@ else
 {
 if ($_SESSION['almacen']==1)
 {
-
+	
 //Inlcuímos a la clase PDF_MC_Table
 require('PDF_MC_Table.php');
  

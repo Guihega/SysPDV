@@ -43,7 +43,7 @@ else
 		 				"4"=>$reg->serie_comprobante.' '.$reg->num_comprobante,
 		 				"5"=>$reg->total_compra,
 		 				"6"=>$reg->impuesto,
-		 				"7"=>($reg->estado=='Aceptado')?'<span class="label bg-green">Aceptado</span>':
+		 				"7"=>($reg->condicion)?'<span class="label bg-green">Aceptado</span>':
 		 				'<span class="label bg-red">Anulado</span>'
 		 				);
 		 		}
@@ -55,7 +55,6 @@ else
 		 		echo json_encode($results);
 
 			break;
-
 
 			case 'ventasfechacliente':
 				$fecha_inicio=$_REQUEST["fecha_inicio"];
@@ -75,7 +74,62 @@ else
 		 				"4"=>$reg->serie_comprobante.' '.$reg->num_comprobante,
 		 				"5"=>$reg->total_venta,
 		 				"6"=>$reg->impuesto,
-		 				"7"=>($reg->estado=='Aceptado')?'<span class="label bg-green">Aceptado</span>':
+		 				"7"=>($reg->condicion)?'<span class="label bg-green">Aceptado</span>':
+		 				'<span class="label bg-red">Anulado</span>'
+		 				);
+		 		}
+		 		$results = array(
+		 			"sEcho"=>1, //Información para el datatables
+		 			"iTotalRecords"=>count($data), //enviamos el total registros al datatable
+		 			"iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+		 			"aaData"=>$data);
+		 		echo json_encode($results);
+
+			break;
+
+			case 'consultastock':
+				$rspta=$consulta->stockproductos();
+		 		//Vamos a declarar un array
+		 		$data= Array();
+
+		 		while ($reg=$rspta->fetch_object()){
+		 			$data[]=array(
+		 				"0"=>$reg->idarticulo,
+		 				"1"=>$reg->categoria,
+		 				"2"=>$reg->codigo,
+		 				"3"=>$reg->nombre,
+		 				"4"=>$reg->stock,
+		 				"5"=>$reg->descripcion,
+		 				"6"=>$reg->imagen,
+		 				"7"=>($reg->condicion)?'<span class="label bg-green">Aceptado</span>':
+		 				'<span class="label bg-red">Anulado</span>'
+		 				);
+		 		}
+		 		$results = array(
+		 			"sEcho"=>1, //Información para el datatables
+		 			"iTotalRecords"=>count($data), //enviamos el total registros al datatable
+		 			"iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+		 			"aaData"=>$data);
+		 		echo json_encode($results);
+
+			break;
+
+			case 'consultacaducidad':
+				$rspta=$consulta->caducidadproductos();
+		 		//Vamos a declarar un array
+		 		$data= Array();
+
+		 		while ($reg=$rspta->fetch_object()){
+		 			$data[]=array(
+		 				"0"=>$reg->idarticulo,
+		 				"1"=>$reg->categoria,
+		 				"2"=>$reg->codigo,
+		 				"3"=>$reg->nombre,
+		 				"4"=>$reg->stock,
+		 				"5"=>$reg->fechacaducidad,
+		 				"6"=>$reg->descripcion,
+		 				"7"=>$reg->imagen,
+		 				"8"=>($reg->condicion)?'<span class="label bg-green">Aceptado</span>':
 		 				'<span class="label bg-red">Anulado</span>'
 		 				);
 		 		}

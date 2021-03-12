@@ -12,7 +12,28 @@ function init(){
 	});
 
 	$('#mCompras').addClass("treeview active");
-    $('#lProveedores').addClass("active");	
+    $('#lProveedores').addClass("active");
+
+    cargaComprobantes();
+
+	//cargaImpuestos();
+}
+
+function cargaComprobantes(){
+	//Cargamos los items al select cliente
+	$.post("../ajax/comprobante.php?op=selectIdentificacion", function(r){
+        $("#tipo_documento").html(r);
+        $('#tipo_documento').selectpicker('refresh');
+        $("#tipo_documento").change();
+	});
+}
+
+function cargaImpuestos(){
+	//Cargamos los items al select cliente
+	$.post("../ajax/impuesto.php?op=selectImpuesto", function(r){
+        $("#impuestonombre").html(r);
+        $('#impuestonombre').selectpicker('refresh');
+	});
 }
 
 //Función limpiar

@@ -183,7 +183,7 @@ else
                       <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                       </div>
-                      <a href="venta.php" class="small-box-footer">Stock <i class="fa fa-arrow-circle-right"></i></a>
+                      <a href="consultastock.php" class="small-box-footer">Stock <i class="fa fa-arrow-circle-right"></i></a>
                       </div>
                   </div>
                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -197,7 +197,7 @@ else
                       <div class="icon">
                         <i class="ion ion-calendar"></i>
                       </div>
-                      <a href="venta.php" class="small-box-footer">Perecederos <i class="fa fa-arrow-circle-right"></i></a>
+                      <a href="consultacaducidad.php" class="small-box-footer">Perecederos <i class="fa fa-arrow-circle-right"></i></a>
                       </div>
                   </div>
                 </div>
@@ -207,6 +207,8 @@ else
                       <div class="box-header with-border">
                         <h3 class="box-title">Compras de los últimos 10 días</h3>
                         <div class="box-tools pull-right">
+                          <!-- <a type="button" href="#" class="btn btn-xs btn btn-xs-box-tool" id="btnCompraDias"><i class="fa fa-download"></i>
+                          </a> -->
                           <button type="button" class="btn btn-xs btn btn-xs-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                           </button>
                           <button type="button" class="btn btn-xs btn btn-xs-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -326,15 +328,31 @@ else
     ?>
 
     <script src="../public/js/Chart.min.js"></script>
-    <script src="../public/js/Chart.bundle.min.js"></script> 
+    <script src="../public/js/Chart.bundle.min.js"></script>
+    <script src="../public/js/canvas2image.js"></script>
     <script type="text/javascript">
-      var ctx = document.getElementById("compras").getContext('2d');
-      var compras = new Chart(ctx, {
+      // function showDocument(base64Url){
+      //   var iframe = "<iframe width='100%' height='100%' src='" + base64Url + "'></iframe>"
+      //   var x = window.open();
+      //   x.document.open();
+      //   x.document.write(iframe);
+      //   x.document.close();
+      // }
+
+      function descargaImagen(){
+        // var type = $sel.value,
+        //     w = $imgW.value,
+        //     h = $imgH.value;
+        Canvas2Image.saveAsImage(document.getElementById('compras'), 600, 600, 'jpg');
+      }
+
+      var ctxComprasDias = document.getElementById("compras").getContext('2d');
+      var comprasDias = new Chart(ctxComprasDias, {
           type: 'bar',
           data: {
             labels: [<?php echo $fechasc; ?>],
             datasets: [{
-              label: 'Compras en $ de los últimos 10 días',
+              label: 'Compras de los últimos 10 días',
               data: [<?php echo $totalesc; ?>],
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
@@ -373,6 +391,17 @@ else
             }
           }
       });
+      //var url_base64jp = document.getElementById("compras").toDataURL("image/jpg");
+      // var url_base64jp = comprasDias.toBase64Image()
+      // $('#btnCompraDias').attr('href',url_base64jp);
+      // $('#btnCompraDias').attr('download','my_file_name.png');
+
+      // document.getElementById("btnCompraDias").addEventListener('click', function(){
+      //   var url_base64jp = document.getElementById("compras").toDataURL("image/jpg");
+      //   var a =  document.getElementById("btnCompraDias");
+      //   a.href = url_base64jp;
+      //   //a.onclick = showDocument(url_base64jp);
+      // });
 
       var ctx = document.getElementById("ventas").getContext('2d');
         var ventas = new Chart(ctx, {
@@ -380,7 +409,7 @@ else
           data: {
             labels: [<?php echo $fechasv; ?>],
             datasets: [{
-              label: 'Ventas en $ de los últimos 10 días',
+              label: 'Ventas de los últimos 10 días',
               data: [<?php echo $totalesv; ?>],
               backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -426,7 +455,7 @@ else
           data: {
             labels: [<?php echo $fechasvMeses; ?>],
             datasets: [{
-              label: 'Ventas en $ de los últimos 12 Meses',
+              label: 'Ventas de los últimos 12 Meses',
               backgroundColor: 'rgba(255, 99, 132, 0.2)',
               borderColor: 'rgba(255, 99, 132, 0.2)',
               data: [<?php echo $totalesvMeses; ?>],
@@ -435,10 +464,6 @@ else
           },
           options: {
             responsive: true,
-            title: {
-              display: false,
-              text: 'Chart.js Line Chart'
-            },
             tooltips: {
               mode: 'index',
               intersect: false,
@@ -446,22 +471,6 @@ else
             hover: {
               mode: 'nearest',
               intersect: true
-            },
-            scales: {
-              xAxes: [{
-                display: true,
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Month'
-                }
-              }],
-              yAxes: [{
-                display: true,
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Value'
-                }
-              }]
             }
           }
       });
@@ -478,12 +487,6 @@ else
             backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
             data: [<?php echo $cantidadmasvendido; ?>],
           }]
-        },
-        options: {
-          title: {
-            display: false,
-            text: 'Predicted world population (millions) in 2050'
-          }
         }
       });
 
@@ -515,22 +518,6 @@ else
           hover: {
             mode: 'index',
             intersect: true
-          },
-          scales: {
-            xAxes: [{
-              display: true,
-              scaleLabel: {
-                display: true,
-                labelString: 'Month'
-              }
-            }],
-            yAxes: [{
-              display: true,
-              scaleLabel: {
-                display: true,
-                labelString: 'Value'
-              }
-            }]
           }
         }
       });

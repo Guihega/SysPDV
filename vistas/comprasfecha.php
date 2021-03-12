@@ -13,8 +13,6 @@ else
   $configuracion = new Configuracion();
   $rsptaConfig = $configuracion->listarActiva();
   $regConfig=$rsptaConfig->fetch_object();
-  //$config=$regConfig->total_venta;
-  //echo $regConfig->empresa;
   
   if (isset($regConfig))
   {
@@ -65,52 +63,52 @@ else
               </div>
             </section>
             <section class="content">
-                <div class="row">
-                  <div class="col-md-12">
-                      <div class="box">
-                        <div class="box-header">
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Fecha Inicio</label>
-                            <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" value="<?php echo date("Y-m-d"); ?>">
-                          </div>
-                          <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <label>Fecha Fin</label>
-                            <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" value="<?php echo date("Y-m-d"); ?>">
-                          </div>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- centro -->
-                        <div class="box-body">
-                          <div class="panel-body table-responsive" id="listadoregistros">
-                            <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
-                              <thead>
-                                <th>Fecha</th>
-                                <th>Usuario</th>
-                                <th>Proveedor</th>
-                                <th>Comprobante</th>
-                                <th>Número</th>
-                                <th>Total Compra</th>
-                                <th>Impuesto</th>
-                                <th>Estado</th>
-                              </thead>
-                              <tbody>                            
-                              </tbody>
-                              <tfoot>
-                                <th>Fecha</th>
-                                <th>Usuario</th>
-                                <th>Proveedor</th>
-                                <th>Comprobante</th>
-                                <th>Número</th>
-                                <th>Total Compra</th>
-                                <th>Impuesto</th>
-                                <th>Estado</th>
-                              </tfoot>
-                            </table>
-                          </div>
-                        </div>
-                        <!--Fin centro -->
-                      </div><!-- /.box -->
-                  </div><!-- /.col -->
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="box">
+                    <div class="box-header">
+                      <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>Fecha Inicio</label>
+                        <input type="date" class="form-control" name="fecha_inicio" id="fecha_inicio" value="<?php echo date("Y-m-d"); ?>">
+                      </div>
+                      <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <label>Fecha Fin</label>
+                        <input type="date" class="form-control" name="fecha_fin" id="fecha_fin" value="<?php echo date("Y-m-d"); ?>">
+                      </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- centro -->
+                    <div class="box-body">
+                      <div class="panel-body table-responsive" id="listadoregistros">
+                        <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
+                          <thead>
+                            <th>Fecha</th>
+                            <th>Usuario</th>
+                            <th>Proveedor</th>
+                            <th>Comprobante</th>
+                            <th>Número</th>
+                            <th>Total Compra</th>
+                            <th>Impuesto</th>
+                            <th>Estado</th>
+                          </thead>
+                          <tbody>                            
+                          </tbody>
+                          <tfoot>
+                            <th>Fecha</th>
+                            <th>Usuario</th>
+                            <th>Proveedor</th>
+                            <th>Comprobante</th>
+                            <th>Número</th>
+                            <th>Total Compra</th>
+                            <th>Impuesto</th>
+                            <th>Estado</th>
+                          </tfoot>
+                        </table>
+                      </div>
+                    </div>
+                    <!--Fin centro -->
+                  </div><!-- /.box -->
+                </div><!-- /.col -->
               </div><!-- /.row -->
           </section><!-- /.content -->
 

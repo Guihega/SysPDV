@@ -13,8 +13,6 @@ else
   $configuracion = new Configuracion();
   $rsptaConfig = $configuracion->listarActiva();
   $regConfig=$rsptaConfig->fetch_object();
-  //$config=$regConfig->total_venta;
-  //echo $regConfig->empresa;
 
   if (isset($regConfig))
   {

@@ -41,7 +41,7 @@ function init(){
 
 	cargaComprobantes();
 
-	//cargaImpuestos();
+	cargaImpuestos();
 
 	$('#mVentas').addClass("treeview active");
     $('#lVentas').addClass("active");
@@ -76,23 +76,24 @@ function cargaComprobantes(){
 	});
 }
 
-// function cargaImpuestos(){
-// 	//Cargamos los items al select cliente
-// 	$.post("../ajax/impuesto.php?op=selectImpuesto", function(r){
-//         $("#impuesto").html(r);
-//         $('#impuesto').selectpicker('refresh');
-// 	});
-// }
+function cargaImpuestos(){
+	//Cargamos los items al select cliente
+	$.post("../ajax/impuesto.php?op=selectImpuesto", function(r){
+        $("#impuestonombre").html(r);
+        $('#impuestonombre').selectpicker('refresh');
+	});
+}
 
 function getNumVenta(){
 	//Cargamos los items al select cliente
 	$.post("../ajax/venta.php?op=getNumVenta", function(r){
 		data = JSON.parse(r);
+		console.log(data);
 		if (data == null){
 			numVenta = 1;
 		}
 		else{
-			numVenta = parseInt(data.num_comprobante) + 1;
+			numVenta = parseInt(data.idventa) + 1;
 		}
 		$("#num_comprobante").val(numVenta);
 	});
@@ -134,8 +135,6 @@ function mostrarform(flag, accion)
 
 		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
-		$("#btnAgregarArt").show();
-		$("#btnAgregarCliente").show();
 		detalles=0;
 		if (accion == 0) {
 			getNumVenta();
@@ -242,9 +241,6 @@ function guardaryeditar(e)
 {
 	e.preventDefault(); //No se activará la acción predeterminada del evento
 	var formData = new FormData($("#formulario")[0]);
-	// for (var pair of formData.entries()) {
-	//     console.log(pair[0]+ ', ' + pair[1]); 
-	// }
 	$.ajax({
 		url: "../ajax/venta.php?op=guardaryeditar",
 	    type: "POST",
@@ -252,8 +248,7 @@ function guardaryeditar(e)
 	    contentType: false,
 	    processData: false,
 	    success: function(datos)
-	    {                    
-          //bootbox.alert(datos);
+	    {
           	if (datos == 0) {
 	    		icono = 'success';
 	    		mensaje = 'Venta registrada';
@@ -263,7 +258,6 @@ function guardaryeditar(e)
 	    		mensaje = 'No se pudieron registrar todos los datos de la venta';
 	    	}
 
-	    	//mensaje(icono,mensaje);
 	    	Swal.fire({
 		      position: 'top-end',
 		      icon: icono,
@@ -307,12 +301,9 @@ function mostrar(idventa)
 		$("#fecha_hora").val(data.fecha);
 		$("#impuesto").val(data.impuesto);
 		$("#idventa").val(data.idventa);
-
-		//Ocultar y mostrar los botones
-		//$("#btnAgregarCliente").hide();
 		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
-		$("#btnAgregarArt").hide();
+		
  	});
 
  	$.post("../ajax/venta.php?op=listarDetalle&id="+idventa,function(r){
@@ -622,7 +613,7 @@ function limpiarComprobante()
 
 function buscarArticuloBarCode(codigoBarras){
 	console.log(codigoBarras);
-    $.post("../ajax/ingreso.php?op=buscarArticuloBarCode",{codigoBarras : codigoBarras}, function(data, status)
+    $.post("../ajax/venta.php?op=buscarArticuloBarCode",{codigoBarras : codigoBarras}, function(data, status)
 	{
 		data = JSON.parse(data);
 		console.log(data);
@@ -688,7 +679,7 @@ function buscarArticuloBarCode(codigoBarras){
 
 function buscarArticuloId(idproducto){
 	console.log(idproducto);
-    $.post("../ajax/ingreso.php?op=buscarArticuloId",{idproducto : idproducto}, function(data, status)
+    $.post("../ajax/venta.php?op=buscarArticuloId",{idproducto : idproducto}, function(data, status)
 	{
 		data = JSON.parse(data);
 		console.log(data);
@@ -761,6 +752,8 @@ function fechaVenta(){
 
 
 function deshabilitaControles(){
+	$("#btnAgregarArt").prop('disabled', true);
+	$("#btnAgregarComprobante").prop("disabled",true);
 	$("#btnAgregarCliente").prop('disabled', true);
 	$(".dropdown-toggle").prop('disabled', true);
 	$("#codigoBarras").attr('readonly', true);
@@ -771,6 +764,8 @@ function deshabilitaControles(){
 
 
 function habilitaControles(){
+	$("#btnAgregarArt").prop('disabled', false);
+	$("#btnAgregarComprobante").prop("disabled",false);
 	$("#btnAgregarCliente").prop('disabled', false);
 	$(".dropdown-toggle").prop('disabled', false);
 	$("#codigoBarras").attr('readonly', false);

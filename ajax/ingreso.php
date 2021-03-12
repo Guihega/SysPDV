@@ -9,7 +9,7 @@ if (!isset($_SESSION["nombre"]))
 }
 else
 {
-		//Obtenemos el nombre de la vista
+	//Obtenemos el nombre de la vista
 	$archivo_actual = basename(__FILE__, ".php");
 
 	require_once "../modelos/Vista.php";
@@ -22,7 +22,6 @@ else
 	//Verificamos que el permiso de la vista este activado
 	if ($_SESSION[$permisovista]==1)
 	{
-
 		require_once "../modelos/Ingreso.php";
 
 		$ingreso=new Ingreso();
@@ -36,7 +35,6 @@ else
 		$fecha_hora=isset($_POST["fecha_hora"])? limpiarCadena($_POST["fecha_hora"]):"";
 		$impuesto=isset($_POST["impuesto"])? limpiarCadena($_POST["impuesto"]):"";
 		$total_compra=isset($_POST["total_compra"])? limpiarCadena($_POST["total_compra"]):"";
-
 		$codigoBarras=isset($_POST["codigoBarras"])? limpiarCadena($_POST["codigoBarras"]):"";
 		$idproducto=isset($_POST["idproducto"])? limpiarCadena($_POST["idproducto"]):"";
 		//$idUsuarioCambio = $_SESSION['idusuario'];
@@ -86,7 +84,7 @@ else
 		                                    <th></th>
 		                                    <th></th>
 		                                    <th></th>
-		                                    <th><h4 id="total">S/.'.$total.'</h4><input type="hidden" name="total_compra" id="total_compra"></th> 
+		                                    <th><span id="simboloMoneda">'.$_SESSION['simbolo'].'</span><label id="total"> '.$total.'</label><input type="hidden" name="total_compra" id="total_compra"></th>
 		                                </tfoot>';
 			break;
 
@@ -97,10 +95,12 @@ else
 
 		 		while ($reg=$rspta->fetch_object()){
 		 			$data[]=array(
-		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idingreso.')" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>'.
-	 					' <button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idingreso.')"  data-toggle="tooltip" data-placement="top" title="Desactivar"><i class="fa fa-close"></i></button>':
+		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idingreso.')" data-toggle="tooltip" title="Ver"><i class="fa fa-eye"></i></button>'.
+	 					' <button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idingreso.')"  data-toggle="tooltip" data-placement="top" title="Desactivar"><i class="fa fa-close"></i></button>'.
+ 						'<a target="_blank" href="../reportes/exIngreso.php?id='.$reg->idingreso.'"> <button class="btn  btn-xs btn-info"data-toggle="tooltip" title="Comprobante"><i class="fa fa-file"></i></button></a>':
 	 					'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idingreso.')" data-toggle="tooltip" title="Ver"><i class="fa fa-eye"></i></button>'.
-	 					' <button class="btn btn-xs btn-primary" onclick="activar('.$reg->idingreso.')"data-toggle="tooltip" title="Activar"><i class="fa fa-check"></i></button>',
+	 					' <button class="btn btn-xs btn-primary" onclick="activar('.$reg->idingreso.')"data-toggle="tooltip" title="Activar"><i class="fa fa-check"></i></button>'.
+ 						'<a target="_blank" href="../reportes/exIngreso.php?id='.$reg->idingreso.'" data-toggle="tooltip" title="Comprobante"> <button class="btn  btn-xs btn-info"><i class="fa fa-file"></i></button></a>',
 		 				"1"=>$reg->fecha,
 		 				"2"=>$reg->proveedor,
 		 				"3"=>$reg->usuario,
@@ -142,7 +142,6 @@ else
 
 		 		while ($reg=$rspta->fetch_object()){
 		 			$data[]=array(
-		 				//"0"=>'<button class="btn btn-xs btn-warning" onclick="agregarDetalle('.$reg->idarticulo.',\''.$reg->nombre.'\',\''.$reg->codigo.'\')"><span class="fa fa-plus"></span></button>',
 		 				"0"=>'<button class="btn btn-xs btn-warning" onclick="buscarArticuloId('.$reg->idarticulo.')"><span class="fa fa-plus"></span></button>',
 		 				"1"=>$reg->nombre,
 		 				"2"=>$reg->categoria,
@@ -162,7 +161,6 @@ else
 			case 'buscarArticuloBarCode':
 				require_once "../modelos/Articulo.php";
 				$articulo=new Articulo();
-
 				$rspta=$articulo->buscarArticuloBarCode($codigoBarras);
 		 		//Codificar el resultado utilizando json
 		 		echo json_encode($rspta);
@@ -171,7 +169,6 @@ else
 			case 'buscarArticuloId':
 				require_once "../modelos/Articulo.php";
 				$articulo=new Articulo();
-
 				$rspta=$articulo->buscarArticuloId($idproducto);
 		 		//Codificar el resultado utilizando json
 		 		echo json_encode($rspta);

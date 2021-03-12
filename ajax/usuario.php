@@ -25,12 +25,9 @@ $num_documento=isset($_POST["num_documento"])? limpiarCadena($_POST["num_documen
 $direccion=isset($_POST["direccion"])? limpiarCadena($_POST["direccion"]):"";
 $telefono=isset($_POST["telefono"])? limpiarCadena($_POST["telefono"]):"";
 $email=isset($_POST["email"])? limpiarCadena($_POST["email"]):"";
-//$emailPassword=isset($_POST["emailPassword"])? limpiarCadena($_POST["emailPassword"]):"";
 $cargo=isset($_POST["cargo"])? limpiarCadena($_POST["cargo"]):"";
 $login=isset($_POST["login"])? limpiarCadena($_POST["login"]):"";
-//$loginPassword=isset($_POST["loginPassword"])? limpiarCadena($_POST["loginPassword"]):"";
 $clave=isset($_POST["clave"])? limpiarCadena($_POST["clave"]):"";
-//$clavePassword=isset($_POST["clavePassword"])? limpiarCadena($_POST["clavePassword"]):"";
 $imagen=isset($_POST["imagen"])? limpiarCadena($_POST["imagen"]):"";
 $idUsuarioCambio = $_SESSION['idusuario'];
 $idgrupo = isset($_POST["idgrupo"])? limpiarCadena($_POST["idgrupo"]):"";
@@ -145,10 +142,10 @@ switch ($_GET["op"]){
 
 		 		while ($reg=$rspta->fetch_object()){
 		 			$data[]=array(
-		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idusuario.')" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>'.
+		 				"0"=>($reg->condicion)?'<button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idusuario.',1)" data-toggle="tooltip" title="Editar"><i class="fa fa-edit"></i></button>'.
 	 					' <button class="btn btn-xs btn-danger" onclick="desactivar('.$reg->idusuario.')" data-toggle="tooltip" data-placement="top" title="Desactivar"><i class="fa fa-close"></i></button>'.
 	 					' <button class="btn btn-xs btn-success" onclick="mostrar('.$reg->idusuario.',2)" data-toggle="tooltip" data-placement="top" title="Cambiar contraseña"><i class="fa fa-key"></i></button>':
-	 					' <button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idusuario.')" data-toggle="tooltip" title="Ver"><i class="fa fa-eye"></i></button>'.
+	 					' <button class="btn btn-xs btn-warning" onclick="mostrar('.$reg->idusuario.',1)" data-toggle="tooltip" title="Ver"><i class="fa fa-eye"></i></button>'.
 	 					' <button class="btn btn-xs btn-primary" onclick="activar('.$reg->idusuario.')"data-toggle="tooltip" title="Activar"><i class="fa fa-check"></i></button>',
 		 				"1"=>$reg->nombre,
 		 				"2"=>$reg->tipo_documento,
@@ -220,13 +217,11 @@ switch ($_GET["op"]){
 				in_array($row->idpermiso,$valores)?$_SESSION[$row->alias]=1:$_SESSION[$row->alias]=0;
 			}
 
-			// //Obtenemos loS datos de la configuración
+			//Obtenemos loS datos de la configuración
 			require_once "../modelos/Configuracion.php";
 			$configuracion = new Configuracion();
 			$rsptaConfig = $configuracion->listarActiva();
 			$regConfig=$rsptaConfig->fetch_object();
-			//$config=$regConfig->total_venta;
-			//echo $regConfig->empresa;
 
 			if (isset($regConfig))
 			{

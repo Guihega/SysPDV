@@ -34,7 +34,6 @@ Class Venta
 	//Implementamos un método para anular la venta
 	public function anular($idventa,$idusuario)
 	{
-		//$sql="UPDATE venta SET condicion='Anulado' WHERE idventa='$idventa'";
 		$sql="UPDATE venta SET total_venta = 0.00, condicion = 0, idusuario='$idusuario' WHERE idventa = '$idventa'";
 		ejecutarConsulta($sql);
 
@@ -75,7 +74,7 @@ Class Venta
 	
 
 	public function getNumVenta(){
-		$sql="SELECT num_comprobante FROM venta ORDER BY idventa DESC LIMIT 1";
+		$sql="SELECT idventa FROM venta ORDER BY idventa DESC LIMIT 1";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
